@@ -1,0 +1,26 @@
+@model Telerik.Sitefinity.Frontend.DynamicContent.Mvc.Models.DynamicContentListViewModel
+
+@using Telerik.Sitefinity.Frontend.DynamicContent.WidgetTemplates.Fields.Helpers;
+@using Telerik.Sitefinity;
+@using Telerik.Sitefinity.Data.ContentLinks;
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Frontend.Mvc.Models;
+@using Telerik.Sitefinity.Web.DataResolving;
+@using Telerik.Sitefinity.Model.ContentLinks;
+@using Telerik.Sitefinity.Modules.Pages;
+@using Telerik.Sitefinity.Frontend.InlineClientAssets.Mvc.Models;
+@using Telerik.Sitefinity.Services;
+
+@Html.Script(ScriptRef.JQuery, "Top", false)
+
+@if (!SystemManager.IsDesignMode) {
+ foreach (var item in Model.Items){
+     <script type="text/javascript" src="https://edgewood-college.formstack.com/forms/js.php/@Html.Raw(item.Fields.FormID)"></script><noscript><a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)" title="Online Form">@Html.Raw(item.Fields.FormName)</a></noscript> 
+    }
+}
+@if (SystemManager.IsDesignMode){
+    foreach (var item in Model.Items){
+            <a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)" target="_blank" title="Online Form">@Html.Raw(item.Fields.FormName)</a>
+        }
+   
+}
