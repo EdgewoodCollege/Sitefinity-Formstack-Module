@@ -20,4 +20,4 @@ Select Form to Display
 
 Template Selection
 
-![Template Selection](/Help/FormstackSettings1.png "Template Selection")
+![Template Selection](/Help/FormstackSettings2.png "Template Selection")
