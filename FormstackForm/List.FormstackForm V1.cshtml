@@ -15,12 +15,24 @@
 
 @if (!SystemManager.IsDesignMode) {
  foreach (var item in Model.Items){
-     <script type="text/javascript" src="https://edgewood-college.formstack.com/forms/js.php/@Html.Raw(item.Fields.FormID)"></script><noscript><a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)" title="Online Form">@Html.Raw(item.Fields.FormName)</a></noscript> 
+    if(@item.Fields.DisableJSONP.ToString() != "True"){
+        <script type="text/javascript" src="https://edgewood-college.formstack.com/forms/js.php/@Html.Raw(item.Fields.FormID)&jsonp=1"></script><noscript><a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)" title="Online Form">@Html.Raw(item.Fields.FormName)</a></noscript>  
+        }
+    else if(@item.Fields.DisableJSONP.ToString() == "True"){
+        <script type="text/javascript" src="https://edgewood-college.formstack.com/forms/js.php/@Html.Raw(item.Fields.FormID)"></script><noscript><a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)" title="Online Form">@Html.Raw(item.Fields.FormName)</a></noscript> 
+    }
+     
     }
 }
 @if (SystemManager.IsDesignMode){
     foreach (var item in Model.Items){
+        if(@item.Fields.DisableJSONP.ToString() != "True"){
+            <a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)&jsonp=1" target="_blank" title="Online Form">@Html.Raw(item.Fields.FormName)</a>
+        }
+        else if(@item.Fields.DisableJSONP.ToString() == "True"){
             <a href="https://edgewood-college.formstack.com/forms/@Html.Raw(item.Fields.FormID)" target="_blank" title="Online Form">@Html.Raw(item.Fields.FormName)</a>
         }
+            
+    }
    
 }
